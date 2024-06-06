@@ -82,12 +82,12 @@ public class ProductIntegrationTest {
         assertThat(updatedProduct.getPrice()).isEqualTo(25F);
     }
 
-    /*@Test
+    @Test
     public void testDeleteProduct() {
         createTestProduct();
         restTemplate.delete("/products/" + productId);
 
         ResponseEntity<ProductsEntity> deleteResponse = restTemplate.getForEntity("/products/" + productId, ProductsEntity.class);
         assertThat(deleteResponse.getStatusCodeValue()).isEqualTo(404);
-    }*/
+    }
 }

@@ -47,4 +47,12 @@ public class ProductsController {
             return ResponseEntity.ok(updatedProduct);
         }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable UUID id) {
+        return productRepository.findById(id).map(product -> {
+            productRepository.delete(product);
+            return ResponseEntity.noContent().build();
+        }).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 }
