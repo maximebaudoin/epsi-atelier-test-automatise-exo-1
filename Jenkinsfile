@@ -2,6 +2,10 @@ pipeline {
     agent any
     tools {
         maven 'Maven 3.9.6'
+
+    options {
+        timestamps()
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -26,12 +30,12 @@ pipeline {
     }
     post {
         success {
-            mail to: 'rapahel.bailhet@ecoles-epsi.net',
+            mail to: 'raphael.bailhet@ecoles-epsi.net',
                 subject: "Reussite de la pipeline: ${currentBuild.fullDisplayName}",
                 body: "La pipeline est bien passée: ${env.BUILD_URL}"
         }
         failure {
-            mail to: 'rapahel.bailhet@ecoles-epsi.net',
+            mail to: 'raphael.bailhet@ecoles-epsi.net',
                 subject: "La Pipeline a failed: ${currentBuild.fullDisplayName}",
                 body: "La pipeline a malheureusement failed: ${env.BUILD_URL}"
         }

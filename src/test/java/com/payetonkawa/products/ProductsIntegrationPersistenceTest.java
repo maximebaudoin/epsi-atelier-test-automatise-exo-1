@@ -41,6 +41,7 @@ public class ProductsIntegrationPersistenceTest {
                         .content(productJson))
                 .andExpect(status().isCreated());
 
+
         List<ProductsEntity> products = productRepository.findAll();
         assertThat(products).isNotNull();
         ProductsEntity savedProduct = products.get(0);
@@ -51,5 +52,6 @@ public class ProductsIntegrationPersistenceTest {
         Optional<ProductsEntity> retrievedProduct = productRepository.findById(productId);
         assertThat(retrievedProduct).isPresent();
         assertThat(retrievedProduct.get().getId()).isNotNull();
+        
     }
 }

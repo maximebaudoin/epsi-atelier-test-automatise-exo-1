@@ -35,6 +35,7 @@ public class ProductIntegrationTest {
             assertThat(createdProduct).isNotNull();
             assertThat(createdProduct.getId()).isNotNull();
 
+
             this.productId = createdProduct.getId();
         }
     }
@@ -44,6 +45,7 @@ public class ProductIntegrationTest {
         ProductsEntity product = new ProductsEntity();
         product.setName("Mon produit test");
         product.setPrice(12.5F);
+
 
         ResponseEntity<ProductsEntity> postResponse = restTemplate.postForEntity("/products", product, ProductsEntity.class);
         assertThat(postResponse.getStatusCodeValue()).isEqualTo(201);
@@ -57,6 +59,7 @@ public class ProductIntegrationTest {
     @Test
     public void testReadProduct() {
         createTestProduct();
+
         ResponseEntity<ProductsEntity> getResponse = restTemplate.getForEntity("/products/" + productId, ProductsEntity.class);
         assertThat(getResponse.getStatusCodeValue()).isEqualTo(200);
         ProductsEntity fetchedProduct = getResponse.getBody();
@@ -67,6 +70,7 @@ public class ProductIntegrationTest {
     @Test
     public void testUpdateProduct() {
         createTestProduct();
+
         ProductsEntity productToUpdate = restTemplate.getForObject("/products/" + productId, ProductsEntity.class);
         assertThat(productToUpdate).isNotNull();
 
@@ -85,6 +89,7 @@ public class ProductIntegrationTest {
     @Test
     public void testDeleteProduct() {
         createTestProduct();
+        
         restTemplate.delete("/products/" + productId);
 
         ResponseEntity<ProductsEntity> deleteResponse = restTemplate.getForEntity("/products/" + productId, ProductsEntity.class);
